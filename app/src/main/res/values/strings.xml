@@ -13,4 +13,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="error_email_empty">email cannot be empty</string>
+    <string name="error_password_empty">Password cannot be empty</string>
+    <string name="error_password_little">password must be at least 6 characters long</string>
+    <string name="error_email_invalid">The e-mail is not valid</string>
+    <string name="error_register_new_motoboy">Unable to register new user, email may be in use</string>
 </resources>
