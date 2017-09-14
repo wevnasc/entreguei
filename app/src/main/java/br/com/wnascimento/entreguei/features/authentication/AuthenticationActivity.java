@@ -12,6 +12,7 @@ import android.widget.Toast;
 import javax.inject.Inject;
 
 import br.com.wnascimento.entreguei.R;
+import br.com.wnascimento.entreguei.features.main.MainActivity;
 import br.com.wnascimento.entreguei.util.StringUtil;
 import br.com.wnascimento.entreguei.util.ValidateUtil;
 import butterknife.BindView;
@@ -113,7 +114,7 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
 
     @Override
     public void toAddresses() {
-        Toast.makeText(this, "Motoboy", Toast.LENGTH_SHORT).show();
+        MainActivity.start(this);
     }
 
 
