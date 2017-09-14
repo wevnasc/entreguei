@@ -8,6 +8,7 @@ public interface AuthenticationContract {
 
         void register(String email, String password);
 
+        void login(String email, String password);
     }
 
     interface View extends BaseContract.View {
@@ -20,6 +21,7 @@ public interface AuthenticationContract {
 
         void toAddresses();
 
+        void showErrorLogin();
     }
 
 
