@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -34,14 +35,23 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
     @BindView(R.id.register_button)
     Button registerButton;
 
+    @BindView(R.id.email_login_form)
+    LinearLayout emailLoginForm;
+
     @Inject
     AuthenticationPresenter authenticationPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.authenticate_button)
+    public void onClick() {
+        authenticationPresenter.login(getEmail(), getPassword());
     }
 
     @OnClick(R.id.register_button)
@@ -80,11 +90,13 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
 
     @Override
     public void showProgress() {
+        emailLoginForm.setVisibility(View.GONE);
         registerProgress.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
+        emailLoginForm.setVisibility(View.VISIBLE);
         registerProgress.setVisibility(View.GONE);
     }
 
@@ -94,9 +106,16 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
     }
 
     @Override
-    public void toAddresses() {
-        Toast.makeText(this, "Created Motoboy", Toast.LENGTH_SHORT).show();
+    public void showErrorLogin() {
+        Toast.makeText(this, R.string.error_login, Toast.LENGTH_SHORT).show();
     }
+
+
+    @Override
+    public void toAddresses() {
+        Toast.makeText(this, "Motoboy", Toast.LENGTH_SHORT).show();
+    }
+
 
     public String getEmail() {
         return email.getText().toString();
@@ -105,4 +124,6 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
     public String getPassword() {
         return password.getText().toString();
     }
+
+
 }
