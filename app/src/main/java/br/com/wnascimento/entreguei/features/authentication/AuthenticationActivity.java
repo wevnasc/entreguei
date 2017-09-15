@@ -113,7 +113,7 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
 
 
     @Override
-    public void toAddresses() {
+    public void toMain() {
         MainActivity.start(this);
     }
 

@@ -1,14 +1,18 @@
 package br.com.wnascimento.entreguei.features.address.search;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
 import br.com.wnascimento.entreguei.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class SearchAddressActivity extends DaggerAppCompatActivity implements SearchAddressesContract.View {
@@ -40,6 +44,11 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
     @Inject
     SearchAddressesContract.Presenter searchAddressPresenter;
 
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, SearchAddressActivity.class);
+        context.startActivity(starter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,5 +100,29 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
     @Override
     public void showErrorAddressNotFound() {
 
+    }
+
+    @Override
+    public void notifySaveSuccess() {
+        Toast.makeText(this, "Success Address", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void notifySaveError() {
+        Toast.makeText(this, "Error Address", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.save_button)
+    public void saveAddress() {
+        Address address = new Address(
+                cepText.getText().toString(),
+                streetText.getText().toString(),
+                neighborhoodText.getText().toString(),
+                cityText.getText().toString(),
+                stateText.getText().toString(),
+                complementText.getText().toString()
+        );
+
+        searchAddressPresenter.saveAddress(address);
     }
 }

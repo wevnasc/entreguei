@@ -21,8 +21,21 @@ public class Address {
     @SerializedName("complemento")
     private String complement;
 
+    public Address(String cep, String street, String neighborhood, String city, String state, String complement) {
+        this.cep = cep;
+        this.street = street;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
+        this.complement = complement;
+    }
+
     public String getCep() {
         return cep;
+    }
+
+    public int getCepToInt() {
+        return Integer.parseInt(cep.replace("-", ""));
     }
 
     public String getStreet() {
