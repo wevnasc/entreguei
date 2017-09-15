@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import br.com.wnascimento.entreguei.util.ImmediateScheduler;
-import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -27,25 +26,25 @@ public class LoginUseCaseTest {
     public static final ImmediateScheduler schedulers = new ImmediateScheduler();
 
     @Mock
-    private MotoboyRepository motoboyRepository;
+    private UserLocalRepository userLocalRepository;
 
     private LoginUseCase loginUseCase;
 
     @Before
     public void setup() {
         initMocks(this);
-        loginUseCase = new LoginUseCase(Schedulers.newThread(), AndroidSchedulers.mainThread(), motoboyRepository);
+        loginUseCase = new LoginUseCase(Schedulers.newThread(), AndroidSchedulers.mainThread(), userLocalRepository);
     }
 
     @Test
     public void shouldReturnMotoboyByEmailAndPassword() {
-        when(motoboyRepository.getMotoboyByEmailAndPassword(EMAIL_TEST, PASSWORD_TEST))
-                .thenReturn(Maybe.just(mock(Motoboy.class)));
+        when(userLocalRepository.getUserByEmailAndPassword(EMAIL_TEST, PASSWORD_TEST))
+                .thenReturn(Maybe.just(mock(User.class)));
 
         loginUseCase
                 .execute(new LoginUseCase.Request(EMAIL_TEST, PASSWORD_TEST));
 
-        verify(motoboyRepository).getMotoboyByEmailAndPassword(EMAIL_TEST, PASSWORD_TEST);
+        verify(userLocalRepository).getUserByEmailAndPassword(EMAIL_TEST, PASSWORD_TEST);
     }
 
 }

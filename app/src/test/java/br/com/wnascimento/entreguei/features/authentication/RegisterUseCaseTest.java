@@ -26,27 +26,27 @@ public class RegisterUseCaseTest {
     public static final ImmediateScheduler schedulers = new ImmediateScheduler();
 
     @Mock
-    private MotoboyRepository motoboyRepository;
+    private UserLocalRepository userLocalRepository;
 
     private RegisterUseCase registerUseCase;
 
     @Before
     public void setup() {
         initMocks(this);
-        registerUseCase = new RegisterUseCase(Schedulers.newThread(), AndroidSchedulers.mainThread(), motoboyRepository);
+        registerUseCase = new RegisterUseCase(Schedulers.newThread(), AndroidSchedulers.mainThread(), userLocalRepository);
     }
 
     @Test
     public void shouldRegisterNewMotoboy() {
 
-        Motoboy motoboy = mock(Motoboy.class);
-        when(motoboyRepository.registerNew(motoboy))
+        User user = mock(User.class);
+        when(userLocalRepository.registerNew(user))
                 .thenReturn(Completable.complete());
 
         registerUseCase
                 .create(new RegisterUseCase.Request(EMAIL_TEST, PASSWORD_TEST));
 
-        verify(motoboyRepository).registerNew(any(Motoboy.class));
+        verify(userLocalRepository).registerNew(any(User.class));
     }
 
 }

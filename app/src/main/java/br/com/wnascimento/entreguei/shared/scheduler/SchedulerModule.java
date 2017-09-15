@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers;
 public class SchedulerModule {
 
     @Provides
-    @ExecutorScheduler
+    @IOScheduler
     Scheduler providerSchedulerExecutor() {
         return Schedulers.io();
     }
