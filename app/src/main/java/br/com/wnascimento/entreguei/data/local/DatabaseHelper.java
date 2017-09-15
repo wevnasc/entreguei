@@ -17,11 +17,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COMMA_SEP = ",";
 
     private static final String SQL_CREATE_TABLE_MOTOBOY =
-            "CREATE TABLE " + MotoboyPersistenceContract.MotoboyEntry.TABLE_NAME + " (" +
-                    MotoboyPersistenceContract.MotoboyEntry.COLUMN_NAME_ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
-                    MotoboyPersistenceContract.MotoboyEntry.COLUMN_NAME_EMAIL + TEXT_TYPE + " NOT NULL " + COMMA_SEP +
-                    MotoboyPersistenceContract.MotoboyEntry.COLUMN_NAME_PASSWORD + TEXT_TYPE + COMMA_SEP +
-                    " UNIQUE(" + MotoboyPersistenceContract.MotoboyEntry.COLUMN_NAME_EMAIL + ")" +
+            "CREATE TABLE " + PersistenceContract.UserEntry.TABLE_NAME + " (" +
+                    PersistenceContract.UserEntry.COLUMN_NAME_ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
+                    PersistenceContract.UserEntry.COLUMN_NAME_EMAIL + TEXT_TYPE + " NOT NULL " + COMMA_SEP +
+                    PersistenceContract.UserEntry.COLUMN_NAME_PASSWORD + TEXT_TYPE + COMMA_SEP +
+                    " UNIQUE(" + PersistenceContract.UserEntry.COLUMN_NAME_EMAIL + ")" +
                     " )";
 
     public DatabaseHelper(Context context) {

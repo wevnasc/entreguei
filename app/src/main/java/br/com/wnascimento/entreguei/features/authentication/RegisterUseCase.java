@@ -2,7 +2,7 @@ package br.com.wnascimento.entreguei.features.authentication;
 
 import javax.inject.Inject;
 
-import br.com.wnascimento.entreguei.shared.scheduler.ExecutorScheduler;
+import br.com.wnascimento.entreguei.shared.scheduler.IOScheduler;
 import br.com.wnascimento.entreguei.shared.scheduler.MainScheduler;
 import br.com.wnascimento.entreguei.shared.usecase.InteractorCompletable;
 import io.reactivex.Completable;
@@ -10,18 +10,18 @@ import io.reactivex.Scheduler;
 
 public class RegisterUseCase extends InteractorCompletable<RegisterUseCase.Request> {
 
-    private final MotoboyRepository motoboyRepository;
+    private final UserLocalRepository userLocalRepository;
 
     @Inject
-    public RegisterUseCase(@ExecutorScheduler Scheduler executor, @MainScheduler Scheduler main, MotoboyRepository motoboyRepository) {
+    public RegisterUseCase(@IOScheduler Scheduler executor, @MainScheduler Scheduler main, UserLocalRepository userLocalRepository) {
         super(executor, main);
-        this.motoboyRepository = motoboyRepository;
+        this.userLocalRepository = userLocalRepository;
     }
 
     @Override
     protected Completable create(Request request) {
-        Motoboy motoboy = new Motoboy(request.getEmail(), request.getPassword());
-        return motoboyRepository.registerNew(motoboy);
+        User user = new User(request.getEmail(), request.getPassword());
+        return userLocalRepository.registerNew(user);
     }
 
     public static final class Request extends InteractorCompletable.Request {

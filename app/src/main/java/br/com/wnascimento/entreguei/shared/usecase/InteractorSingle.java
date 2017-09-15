@@ -1,23 +1,22 @@
 package br.com.wnascimento.entreguei.shared.usecase;
 
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
+import io.reactivex.Single;
 
 
-public abstract class InteractorMaybe<T, R extends InteractorMaybe.Request> {
+public abstract class InteractorSingle<T, R extends InteractorSingle.Request> {
 
     private final Scheduler executor;
     private final Scheduler main;
 
-    protected InteractorMaybe(Scheduler executor, Scheduler main) {
+    protected InteractorSingle(Scheduler executor, Scheduler main) {
         this.executor = executor;
         this.main = main;
     }
 
-    protected abstract Maybe<T> create(R request);
+    protected abstract Single<T> create(R request);
 
-    public Maybe<T> execute(R request) {
+    public Single<T> execute(R request) {
         return create(request)
                 .subscribeOn(executor)
                 .observeOn(main);

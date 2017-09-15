@@ -3,11 +3,10 @@ package br.com.wnascimento.entreguei.features.authentication;
 
 import javax.inject.Inject;
 
-import br.com.wnascimento.entreguei.data.exception.MotoboyNotFoundException;
+import br.com.wnascimento.entreguei.shared.exception.MotoboyNotFoundException;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableCompletableObserver;
-import io.reactivex.observers.DisposableMaybeObserver;
 
 public class AuthenticationPresenter implements AuthenticationContract.Presenter {
 
