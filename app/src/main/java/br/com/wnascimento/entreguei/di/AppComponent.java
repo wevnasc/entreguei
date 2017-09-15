@@ -4,7 +4,7 @@ package br.com.wnascimento.entreguei.di;
 import javax.inject.Singleton;
 
 import br.com.wnascimento.entreguei.MainApplication;
-import br.com.wnascimento.entreguei.data.RepositoryModule;
+import br.com.wnascimento.entreguei.data.DataModule;
 import br.com.wnascimento.entreguei.shared.scheduler.SchedulerModule;
 import dagger.Component;
 import dagger.android.AndroidInjector;
@@ -15,7 +15,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AndroidSupportInjectionModule.class,
         ActivityBuilder.class,
         AppModule.class,
-        RepositoryModule.class,
+        DataModule.class,
         SchedulerModule.class
 })
 

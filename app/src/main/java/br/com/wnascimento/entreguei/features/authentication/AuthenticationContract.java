@@ -19,7 +19,7 @@ public interface AuthenticationContract {
 
         void showErrorRegister();
 
-        void toAddresses();
+        void toMain();
 
         void showErrorLogin();
     }

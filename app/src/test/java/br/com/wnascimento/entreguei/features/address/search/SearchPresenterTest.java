@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -22,6 +23,9 @@ public class SearchPresenterTest {
     @Mock
     private SearchAddressUseCase searchAddressUseCase;
 
+    @Mock
+    private SaveAddressUseCase saveAddressUseCase;
+
 
     private SearchAddressesContract.Presenter searchAddressPresenter;
 
@@ -29,16 +33,13 @@ public class SearchPresenterTest {
     @Before
     public void setup() {
         initMocks(this);
-        searchAddressPresenter = new SearchAddressesPresenter(searchAddressView, searchAddressUseCase);
+        searchAddressPresenter = new SearchAddressesPresenter(searchAddressView, searchAddressUseCase, saveAddressUseCase);
     }
 
 
     @Test
     public void onClickSearch_showAddress() {
-        when(searchAddressUseCase.execute(any(SearchAddressUseCase.Request.class)))
-                .thenReturn(Single.just(mock(Address.class)));
-
-        searchAddressPresenter.searchAddress(CEP_TEST);
+        searchAddress(Single.just(mock(Address.class)));
 
         verify(searchAddressView).showProgress();
         verify(searchAddressView).hideProgress();
@@ -47,15 +48,46 @@ public class SearchPresenterTest {
 
     @Test
     public void onClickSearch_showErrorAddressNotFound() {
-        when(searchAddressUseCase.execute(any(SearchAddressUseCase.Request.class)))
-                .thenReturn(Single.error(mock(Exception.class)));
-
-        searchAddressPresenter.searchAddress(CEP_TEST);
+        searchAddress(Single.error(mock(Exception.class)));
 
         verify(searchAddressView).showProgress();
         verify(searchAddressView).hideProgress();
         verify(searchAddressView).showErrorAddressNotFound();
     }
 
+    private void searchAddress(Single<Address> just) {
+        when(searchAddressUseCase.execute(any(SearchAddressUseCase.Request.class)))
+                .thenReturn(just);
+
+        searchAddressPresenter.searchAddress(CEP_TEST);
+    }
+
+    @Test
+    public void onClickSave_saveAddressWithSuccess() {
+
+        when(saveAddressUseCase.execute(any(SaveAddressUseCase.Request.class)))
+                .thenReturn(Completable.complete());
+
+        searchAddressPresenter.saveAddress(mock(Address.class));
+
+        verify(searchAddressView).showProgress();
+        verify(searchAddressView).hideProgress();
+        verify(searchAddressView).notifySaveSuccess();
+
+    }
+
+    @Test
+    public void onClickSave_showMessageError() {
+
+        when(saveAddressUseCase.execute(any(SaveAddressUseCase.Request.class)))
+                .thenReturn(Completable.error(mock(Exception.class)));
+
+        searchAddressPresenter.saveAddress(mock(Address.class));
+
+        verify(searchAddressView).showProgress();
+        verify(searchAddressView).hideProgress();
+        verify(searchAddressView).notifySaveError();
+
+    }
 
 }

@@ -6,7 +6,9 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import br.com.wnascimento.entreguei.shared.preferences.ApplicationPreferencesInterface;
 import br.com.wnascimento.entreguei.util.ImmediateScheduler;
+import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -28,12 +30,15 @@ public class LoginUseCaseTest {
     @Mock
     private UserLocalRepository userLocalRepository;
 
+    @Mock
+    private ApplicationPreferencesInterface applicationPreferences;
+
     private LoginUseCase loginUseCase;
 
     @Before
     public void setup() {
         initMocks(this);
-        loginUseCase = new LoginUseCase(Schedulers.newThread(), AndroidSchedulers.mainThread(), userLocalRepository);
+        loginUseCase = new LoginUseCase(Schedulers.newThread(), AndroidSchedulers.mainThread(), userLocalRepository, applicationPreferences);
     }
 
     @Test
@@ -42,9 +47,11 @@ public class LoginUseCaseTest {
                 .thenReturn(Maybe.just(mock(User.class)));
 
         loginUseCase
-                .execute(new LoginUseCase.Request(EMAIL_TEST, PASSWORD_TEST));
+                .execute(new LoginUseCase.Request(EMAIL_TEST, PASSWORD_TEST))
+                .subscribe();
 
         verify(userLocalRepository).getUserByEmailAndPassword(EMAIL_TEST, PASSWORD_TEST);
+        verify(applicationPreferences).saveCurrentUser(any(User.class));
     }
 
 }

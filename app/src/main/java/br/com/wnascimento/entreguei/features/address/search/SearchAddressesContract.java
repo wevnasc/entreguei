@@ -7,6 +7,8 @@ public interface SearchAddressesContract {
 
     interface Presenter extends BaseContract.Presenter {
         void searchAddress(String cep);
+
+        void saveAddress(Address address);
     }
 
     interface View extends BaseContract.View {
@@ -18,6 +20,10 @@ public interface SearchAddressesContract {
         void showAddressInformation(Address address);
 
         void showErrorAddressNotFound();
+
+        void notifySaveSuccess();
+
+        void notifySaveError();
     }
 
 }

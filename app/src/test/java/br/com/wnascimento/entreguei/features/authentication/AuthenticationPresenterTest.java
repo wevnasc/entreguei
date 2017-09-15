@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import io.reactivex.Completable;
-import io.reactivex.Maybe;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -42,7 +41,7 @@ public class AuthenticationPresenterTest {
         registerMotoboy(Completable.complete());
 
         verify(authenticationView).showProgress();
-        verify(authenticationView).toAddresses();
+        verify(authenticationView).toMain();
         verify(authenticationView).hideProgress();
 
     }
@@ -68,29 +67,30 @@ public class AuthenticationPresenterTest {
     @Test
     public void onClickLogin_showAddresses() {
 
-        when(loginUseCase.execute(any(LoginUseCase.Request.class)))
-                .thenReturn(Completable.complete());
-
-        authenticationPresenter.login(EMAIL_TEST, PASSWORD_TEST);
+        login(Completable.complete());
 
         verify(authenticationView).showProgress();
         verify(authenticationView).hideProgress();
-        verify(authenticationView).toAddresses();
+        verify(authenticationView).toMain();
 
     }
 
     @Test
     public void onClickLogin_showLoginError() {
 
-        when(loginUseCase.execute(any(LoginUseCase.Request.class)))
-                .thenReturn(Completable.error(mock(Exception.class)));
-
-        authenticationPresenter.login(EMAIL_TEST, PASSWORD_TEST);
+        login(Completable.error(mock(Exception.class)));
 
         verify(authenticationView).showProgress();
         verify(authenticationView).hideProgress();
         verify(authenticationView).showErrorLogin();
 
+    }
+
+    private void login(Completable error) {
+        when(loginUseCase.execute(any(LoginUseCase.Request.class)))
+                .thenReturn(error);
+
+        authenticationPresenter.login(EMAIL_TEST, PASSWORD_TEST);
     }
 
 }

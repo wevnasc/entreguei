@@ -77,6 +77,14 @@
                 android:layout_height="wrap_content"
                 tools:text="00000-050"/>
 
+            <Button
+                android:id="@+id/save_button"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_save"/>
+
 
         </RelativeLayout>
 
