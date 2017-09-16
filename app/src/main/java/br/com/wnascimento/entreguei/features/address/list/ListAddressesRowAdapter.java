@@ -17,10 +17,12 @@ import butterknife.ButterKnife;
 public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesRowAdapter.ViewHolder> {
 
     private final List<Address> addressList;
+    private final CallbackAddressList callbackAddressList;
 
 
-    public ListAddressesRowAdapter(List<Address> addressList) {
+    public ListAddressesRowAdapter(List<Address> addressList, CallbackAddressList callbackAddressList) {
         this.addressList = addressList;
+        this.callbackAddressList = callbackAddressList;
     }
 
     @Override
@@ -37,6 +39,8 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
         holder.stateText.setText(address.getState());
         holder.neighborhoodText.setText(address.getNeighborhood());
         holder.cepText.setText(address.getCep());
+
+        holder.itemView.setOnClickListener(v -> callbackAddressList.onClickItem(address));
 
     }
 
@@ -63,6 +67,12 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
             super(view);
             ButterKnife.bind(this, view);
         }
+    }
+
+    public interface CallbackAddressList{
+
+        void onClickItem(Address address);
+
     }
 
 }
