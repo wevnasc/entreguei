@@ -12,7 +12,7 @@ import android.widget.Toast;
 import javax.inject.Inject;
 
 import br.com.wnascimento.entreguei.R;
-import br.com.wnascimento.entreguei.features.main.MainActivity;
+import br.com.wnascimento.entreguei.features.address.list.ListAddressesActivity;
 import br.com.wnascimento.entreguei.util.StringUtil;
 import br.com.wnascimento.entreguei.util.ValidateUtil;
 import butterknife.BindView;
@@ -46,7 +46,7 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_authentication);
         ButterKnife.bind(this);
     }
 
@@ -114,7 +114,7 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
 
     @Override
     public void toMain() {
-        MainActivity.start(this);
+        ListAddressesActivity.start(this);
     }
 
 

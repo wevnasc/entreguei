@@ -1,4 +1,4 @@
-package br.com.wnascimento.entreguei.features.address.search;
+package br.com.wnascimento.entreguei.features.address;
 
 import com.google.gson.annotations.SerializedName;
 

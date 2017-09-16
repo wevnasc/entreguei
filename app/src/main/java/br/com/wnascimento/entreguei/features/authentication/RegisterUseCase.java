@@ -4,11 +4,11 @@ import javax.inject.Inject;
 
 import br.com.wnascimento.entreguei.shared.scheduler.IOScheduler;
 import br.com.wnascimento.entreguei.shared.scheduler.MainScheduler;
-import br.com.wnascimento.entreguei.shared.usecase.InteractorCompletable;
+import br.com.wnascimento.entreguei.shared.usecase.CompletableUseCase;
 import io.reactivex.Completable;
 import io.reactivex.Scheduler;
 
-public class RegisterUseCase extends InteractorCompletable<RegisterUseCase.Request> {
+public class RegisterUseCase extends CompletableUseCase<RegisterUseCase.Request> {
 
     private final UserLocalRepository userLocalRepository;
 
@@ -24,7 +24,7 @@ public class RegisterUseCase extends InteractorCompletable<RegisterUseCase.Reque
         return userLocalRepository.registerNew(user);
     }
 
-    public static final class Request extends InteractorCompletable.Request {
+    public static final class Request extends CompletableUseCase.Request {
 
         private final String email;
         private final String password;

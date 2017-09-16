@@ -2,6 +2,7 @@ package br.com.wnascimento.entreguei.features.address.search;
 
 import javax.inject.Inject;
 
+import br.com.wnascimento.entreguei.features.address.Address;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableCompletableObserver;

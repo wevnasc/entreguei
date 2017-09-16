@@ -2,13 +2,14 @@ package br.com.wnascimento.entreguei.features.address.search;
 
 import javax.inject.Inject;
 
+import br.com.wnascimento.entreguei.features.address.Address;
 import br.com.wnascimento.entreguei.shared.scheduler.IOScheduler;
 import br.com.wnascimento.entreguei.shared.scheduler.MainScheduler;
-import br.com.wnascimento.entreguei.shared.usecase.InteractorSingle;
+import br.com.wnascimento.entreguei.shared.usecase.SingleUseCase;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 
-public class SearchAddressUseCase extends InteractorSingle<Address, SearchAddressUseCase.Request> {
+public class SearchAddressUseCase extends SingleUseCase<Address, SearchAddressUseCase.Request> {
 
     private final AddressRemoteRepository addressRemoteRepository;
 
@@ -23,7 +24,7 @@ public class SearchAddressUseCase extends InteractorSingle<Address, SearchAddres
         return addressRemoteRepository.getAddressByCep(request.getCep());
     }
 
-    public static final class Request extends InteractorSingle.Request{
+    public static final class Request extends SingleUseCase.Request{
 
         private final String cep;
 
