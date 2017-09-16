@@ -14,6 +14,7 @@ import br.com.wnascimento.entreguei.shared.preferences.ApplicationPreferencesInt
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.functions.Action;
 
 
 public class AddressDatabaseRepository implements AddressLocalRepository {
@@ -90,5 +91,19 @@ public class AddressDatabaseRepository implements AddressLocalRepository {
             e.onComplete();
 
         }, BackpressureStrategy.BUFFER);
+    }
+
+    @Override
+    public Completable removeAddress(int cep) {
+
+        return Completable.fromAction(() -> {
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+            String [] args = {String.valueOf(cep), String.valueOf(applicationPreferences.getCurrentUser().getId())};
+
+            db.delete(UserAddressEntry.TABLE_NAME, UserAddressEntry.COLUMN_NAME_ADDRESS_CEP + " = ?" +
+                    " AND " + UserAddressEntry.COLUMN_NAME_USER_ID + " = ?", args);
+
+        });
     }
 }

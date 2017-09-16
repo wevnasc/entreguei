@@ -10,4 +10,6 @@ public interface AddressLocalRepository {
     Completable save(Address address);
 
     Flowable<Address> getAddresses();
+
+    Completable removeAddress(int cep);
 }
