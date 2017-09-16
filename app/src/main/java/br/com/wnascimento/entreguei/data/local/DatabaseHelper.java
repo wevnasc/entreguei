@@ -44,10 +44,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     UserAddressEntry.COLUMN_NAME_USER_ID + INTEGER_TYPE  + COMMA_SEP +
                     UserAddressEntry.COLUMN_NAME_ADDRESS_CEP + INTEGER_TYPE + COMMA_SEP +
                     "PRIMARY KEY (" + UserAddressEntry.COLUMN_NAME_USER_ID + ", " + UserAddressEntry.COLUMN_NAME_ADDRESS_CEP + ")," +
-                    "FOREIGN KEY (" + UserAddressEntry.COLUMN_NAME_USER_ID + ") REFERENCES " + UserEntry.TABLE_NAME  + " ( " + UserEntry.COLUMN_NAME_ID + " )" +
-                    "ON DELETE CASCADE ON UPDATE NO ACTION," +
-                    "FOREIGN KEY (" + UserAddressEntry.COLUMN_NAME_ADDRESS_CEP + ") REFERENCES " + AddressEntry.TABLE_NAME  + " (" + AddressEntry.COLUMN_NAME_CEP + ")" +
-                    "ON DELETE CASCADE ON UPDATE NO ACTION" +
+                    "FOREIGN KEY (" + UserAddressEntry.COLUMN_NAME_USER_ID + ") " +
+                    "REFERENCES " + UserEntry.TABLE_NAME  + " ( " + UserEntry.COLUMN_NAME_ID + " )" + COMMA_SEP +
+                    "FOREIGN KEY (" + UserAddressEntry.COLUMN_NAME_ADDRESS_CEP + ") " +
+                    "REFERENCES " + AddressEntry.TABLE_NAME  + " (" + AddressEntry.COLUMN_NAME_CEP + ")" +
                     " )";
 
     public DatabaseHelper(Context context) {

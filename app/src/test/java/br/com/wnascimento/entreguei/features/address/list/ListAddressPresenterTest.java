@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import java.util.List;
 
 import br.com.wnascimento.entreguei.features.address.Address;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -18,8 +19,13 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ListAddressPresenterTest {
 
+    private static final int CEP_TEST = 0;
+
     @Mock
     private ListAddressesUseCase listAddressesUseCase;
+
+    @Mock
+    private RemoveAddressUseCase removeAddressUseCase;
 
     @Mock
     private ListAddressesContract.View listAddressesView;
@@ -34,7 +40,7 @@ public class ListAddressPresenterTest {
     @Before
     public void setup() {
         initMocks(this);
-        listAddressesPresenter = new ListAddressesPresenter(listAddressesView, listAddressesUseCase);
+        listAddressesPresenter = new ListAddressesPresenter(listAddressesView, listAddressesUseCase, removeAddressUseCase);
     }
 
     @Test
@@ -64,6 +70,21 @@ public class ListAddressPresenterTest {
                 .thenReturn(just);
 
         listAddressesPresenter.listAddresses();
+    }
+
+    @Test
+    public void removeAddress_notifyAddressRemoved(){
+
+        when(removeAddressUseCase.execute(any(RemoveAddressUseCase.Request.class)))
+                .thenReturn(Completable.complete());
+
+        listAddressesPresenter.removeAddress(CEP_TEST);
+
+        verify(listAddressesView).showProgress();
+        verify(listAddressesView).hideProgress();
+        verify(listAddressesView).notifyAddressRemoved();
+
+
     }
 
 }

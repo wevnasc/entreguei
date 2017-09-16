@@ -18,11 +18,15 @@ public interface ListAddressesContract {
         void showAddresses(List<Address> addressList);
 
         void notifyEmptyList();
+
+        void notifyAddressRemoved();
     }
 
     interface Presenter extends BaseContract.Presenter {
 
         void listAddresses();
+
+        void removeAddress(int cep);
     }
 
 }

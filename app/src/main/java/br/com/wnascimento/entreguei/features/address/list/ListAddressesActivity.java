@@ -1,5 +1,6 @@
 package br.com.wnascimento.entreguei.features.address.list;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -73,8 +74,25 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     }
 
     @Override
+    public void notifyAddressRemoved() {
+
+    }
+
+    @Override
     public void onClickItem(Address address) {
         AddressDetailActivity.start(this, address);
+    }
+
+    @Override
+    public void onLongClickItem(int cep) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.title_warning)
+                .setMessage(R.string.message_remove_address)
+                .setPositiveButton(R.string.action_yes, (dialogInterface, i) -> {
+                    listAddressPresenter.removeAddress(cep);
+                })
+                .setNegativeButton(R.string.action_no, null)
+                .show();
     }
 
 }
