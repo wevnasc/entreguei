@@ -13,13 +13,14 @@ import javax.inject.Inject;
 
 import br.com.wnascimento.entreguei.R;
 import br.com.wnascimento.entreguei.features.address.Address;
+import br.com.wnascimento.entreguei.features.address.detail.AddressDetailActivity;
 import br.com.wnascimento.entreguei.features.address.search.SearchAddressActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.DaggerAppCompatActivity;
 
-public class ListAddressesActivity extends DaggerAppCompatActivity implements ListAddressesContract.View {
+public class ListAddressesActivity extends DaggerAppCompatActivity implements ListAddressesContract.View, ListAddressesRowAdapter.CallbackAddressList {
 
     @Inject
     ListAddressesContract.Presenter listAddressPresenter;
@@ -63,11 +64,17 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     @Override
     public void showAddresses(List<Address> addressList) {
         listAddress.setLayoutManager(new LinearLayoutManager(this));
-        listAddress.setAdapter(new ListAddressesRowAdapter(addressList));
+        listAddress.setAdapter(new ListAddressesRowAdapter(addressList, this));
     }
 
     @Override
     public void notifyEmptyList() {
         Toast.makeText(this, "Erro", Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onClickItem(Address address) {
+        AddressDetailActivity.start(this, address);
+    }
+
 }

@@ -2,7 +2,9 @@ package br.com.wnascimento.entreguei.features.address;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable{
 
     private String cep;
 

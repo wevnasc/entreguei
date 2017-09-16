@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".features.address.list.ListAddressesActivity" />
         <activity android:name=".features.address.search.SearchAddressActivity" />
+        <activity android:name=".features.address.detail.AddressDetailActivity"></activity>
     </application>
 
 </manifest>
