@@ -10,6 +10,7 @@ import android.widget.Toast;
 import javax.inject.Inject;
 
 import br.com.wnascimento.entreguei.R;
+import br.com.wnascimento.entreguei.features.address.Address;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

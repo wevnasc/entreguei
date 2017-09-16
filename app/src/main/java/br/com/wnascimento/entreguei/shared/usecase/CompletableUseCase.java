@@ -2,16 +2,14 @@ package br.com.wnascimento.entreguei.shared.usecase;
 
 import io.reactivex.Completable;
 import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 
-public abstract class InteractorCompletable<R extends InteractorCompletable.Request> {
+public abstract class CompletableUseCase<R extends CompletableUseCase.Request> {
 
     private final Scheduler executor;
     private final Scheduler main;
 
-    protected InteractorCompletable(Scheduler executor, Scheduler main) {
+    protected CompletableUseCase(Scheduler executor, Scheduler main) {
         this.executor = executor;
         this.main = main;
     }

@@ -1,5 +1,7 @@
 package br.com.wnascimento.entreguei.di;
 
+import br.com.wnascimento.entreguei.features.address.list.ListAddressModule;
+import br.com.wnascimento.entreguei.features.address.list.ListAddressesActivity;
 import br.com.wnascimento.entreguei.features.address.search.SearchAddressActivity;
 import br.com.wnascimento.entreguei.features.address.search.SearchAddressesModule;
 import br.com.wnascimento.entreguei.features.authentication.AuthenticationActivity;
@@ -15,5 +17,8 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = SearchAddressesModule.class)
     abstract SearchAddressActivity bindSearchAddressesActivity();
+
+    @ContributesAndroidInjector(modules = ListAddressModule.class)
+    abstract ListAddressesActivity bindListAddressesActivity();
 
 }

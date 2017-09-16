@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import br.com.wnascimento.entreguei.features.address.Address;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 

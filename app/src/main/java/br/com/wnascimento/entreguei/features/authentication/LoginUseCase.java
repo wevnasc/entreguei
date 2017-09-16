@@ -2,15 +2,14 @@ package br.com.wnascimento.entreguei.features.authentication;
 
 import javax.inject.Inject;
 
-import br.com.wnascimento.entreguei.data.preferences.ApplicationPreferences;
 import br.com.wnascimento.entreguei.shared.preferences.ApplicationPreferencesInterface;
 import br.com.wnascimento.entreguei.shared.scheduler.IOScheduler;
 import br.com.wnascimento.entreguei.shared.scheduler.MainScheduler;
-import br.com.wnascimento.entreguei.shared.usecase.InteractorCompletable;
+import br.com.wnascimento.entreguei.shared.usecase.CompletableUseCase;
 import io.reactivex.Completable;
 import io.reactivex.Scheduler;
 
-class LoginUseCase extends InteractorCompletable<LoginUseCase.Request> {
+class LoginUseCase extends CompletableUseCase<LoginUseCase.Request> {
 
     private final UserLocalRepository userLocalRepository;
 
@@ -32,7 +31,7 @@ class LoginUseCase extends InteractorCompletable<LoginUseCase.Request> {
                                 applicationPreferences.saveCurrentUser(user)));
     }
 
-    public static final class Request extends InteractorCompletable.Request {
+    public static final class Request extends CompletableUseCase.Request {
 
         private final String email;
         private final String password;

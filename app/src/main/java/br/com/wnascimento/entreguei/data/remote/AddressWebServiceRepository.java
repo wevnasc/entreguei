@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import br.com.wnascimento.entreguei.features.address.search.Address;
+import br.com.wnascimento.entreguei.features.address.Address;
 import br.com.wnascimento.entreguei.features.address.search.AddressRemoteRepository;
 import io.reactivex.Single;
 import okhttp3.Call;

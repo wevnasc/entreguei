@@ -1,14 +1,19 @@
 package br.com.wnascimento.entreguei.data.local;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import javax.inject.Inject;
 
-import br.com.wnascimento.entreguei.features.address.search.Address;
+import br.com.wnascimento.entreguei.data.local.PersistenceContract.AddressEntry;
+import br.com.wnascimento.entreguei.data.local.PersistenceContract.UserAddressEntry;
+import br.com.wnascimento.entreguei.features.address.Address;
 import br.com.wnascimento.entreguei.features.address.search.AddressLocalRepository;
 import br.com.wnascimento.entreguei.shared.preferences.ApplicationPreferencesInterface;
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 
 
 public class AddressDatabaseRepository implements AddressLocalRepository {
@@ -30,23 +35,60 @@ public class AddressDatabaseRepository implements AddressLocalRepository {
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            values.put(PersistenceContract.AddressEntry.COLUMN_NAME_CEP, address.getCepToInt());
-            values.put(PersistenceContract.AddressEntry.COLUMN_NAME_CITY, address.getCity());
-            values.put(PersistenceContract.AddressEntry.COLUMN_NAME_COMPLEMENT, address.getComplement());
-            values.put(PersistenceContract.AddressEntry.COLUMN_NAME_NEIGHBORHOOD, address.getNeighborhood());
-            values.put(PersistenceContract.AddressEntry.COLUMN_NAME_STATE, address.getState());
-            values.put(PersistenceContract.AddressEntry.COLUMN_NAME_STREET, address.getStreet());
+            values.put(AddressEntry.COLUMN_NAME_CEP, address.getCepToInt());
+            values.put(AddressEntry.COLUMN_NAME_CITY, address.getCity());
+            values.put(AddressEntry.COLUMN_NAME_COMPLEMENT, address.getComplement());
+            values.put(AddressEntry.COLUMN_NAME_NEIGHBORHOOD, address.getNeighborhood());
+            values.put(AddressEntry.COLUMN_NAME_STATE, address.getState());
+            values.put(AddressEntry.COLUMN_NAME_STREET, address.getStreet());
 
-            db.insert(PersistenceContract.AddressEntry.TABLE_NAME, null, values);
+            db.insert(AddressEntry.TABLE_NAME, null, values);
 
             values = new ContentValues();
-            values.put(PersistenceContract.UserAddressEntry.COLUMN_NAME_ADDRESS_CEP, address.getCepToInt());
-            values.put(PersistenceContract.UserAddressEntry.COLUMN_NAME_USER_ID, applicationPreferences.getCurrentUser().getId());
+            values.put(UserAddressEntry.COLUMN_NAME_ADDRESS_CEP, address.getCepToInt());
+            values.put(UserAddressEntry.COLUMN_NAME_USER_ID, applicationPreferences.getCurrentUser().getId());
 
-            db.insertOrThrow(PersistenceContract.UserAddressEntry.TABLE_NAME, null, values);
+            db.insertOrThrow(UserAddressEntry.TABLE_NAME, null, values);
 
             db.close();
 
         });
+    }
+
+    @Override
+    public Flowable<Address> getAddresses() {
+        return Flowable.create(e -> {
+            SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+            String query = "SELECT " + AddressEntry.TABLE_NAME + ".* FROM " + AddressEntry.TABLE_NAME +
+                    " INNER JOIN " + UserAddressEntry.TABLE_NAME +
+                    " ON " + AddressEntry.TABLE_NAME + "." + AddressEntry.COLUMN_NAME_CEP + " = " + UserAddressEntry.TABLE_NAME + "." + UserAddressEntry.COLUMN_NAME_ADDRESS_CEP +
+                    " WHERE " + UserAddressEntry.COLUMN_NAME_USER_ID + " = ?";
+
+            String [] args = {String.valueOf(applicationPreferences.getCurrentUser().getId())};
+
+            Cursor cursor = db.rawQuery(query, args);
+
+            if (cursor != null && cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    Address address = new Address(
+                            String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_CEP))),
+                            cursor.getString(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_STREET)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_NEIGHBORHOOD)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_CITY)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_STATE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_COMPLEMENT))
+                    );
+                    e.onNext(address);
+                }
+            }
+
+            if (cursor != null) {
+                cursor.close();
+            }
+
+            e.onComplete();
+
+        }, BackpressureStrategy.BUFFER);
     }
 }

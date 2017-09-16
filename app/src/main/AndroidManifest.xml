@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".features.main.MainActivity" />
+        <activity android:name=".features.address.list.ListAddressesActivity" />
         <activity android:name=".features.address.search.SearchAddressActivity" />
     </application>
 

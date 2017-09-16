@@ -5,6 +5,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import br.com.wnascimento.entreguei.features.address.Address;
 import br.com.wnascimento.entreguei.util.ImmediateScheduler;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;

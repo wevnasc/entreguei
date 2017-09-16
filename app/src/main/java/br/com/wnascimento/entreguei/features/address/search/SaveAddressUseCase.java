@@ -3,13 +3,14 @@ package br.com.wnascimento.entreguei.features.address.search;
 
 import javax.inject.Inject;
 
+import br.com.wnascimento.entreguei.features.address.Address;
 import br.com.wnascimento.entreguei.shared.scheduler.IOScheduler;
 import br.com.wnascimento.entreguei.shared.scheduler.MainScheduler;
-import br.com.wnascimento.entreguei.shared.usecase.InteractorCompletable;
+import br.com.wnascimento.entreguei.shared.usecase.CompletableUseCase;
 import io.reactivex.Completable;
 import io.reactivex.Scheduler;
 
-public class SaveAddressUseCase extends InteractorCompletable<SaveAddressUseCase.Request>{
+public class SaveAddressUseCase extends CompletableUseCase<SaveAddressUseCase.Request> {
 
     private final AddressLocalRepository addressLocalRepository;
 
@@ -24,7 +25,7 @@ public class SaveAddressUseCase extends InteractorCompletable<SaveAddressUseCase
         return addressLocalRepository.save(request.getAddress());
     }
 
-    public static class Request extends InteractorCompletable.Request {
+    public static class Request extends CompletableUseCase.Request {
 
         private final Address address;
 
