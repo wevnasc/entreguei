@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/city_text"
+        style="@style/TitlePrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:transitionName="city"
+        tools:text="São Paulo" />
+
+    <TextView
+        android:id="@+id/separator_text"
+        style="@style/TitlePrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/city_text"
+        android:text="@string/separator"
+        android:transitionName="separator" />
+
+    <TextView
+        android:id="@+id/state_text"
+        style="@style/TitlePrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/separator_text"
+        android:transitionName="state"
+        tools:text="SP" />
+
+    <TextView
+        android:id="@+id/street_text"
+        style="@style/TitleSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/city_text"
+        android:layout_marginTop="8dp"
+        tools:text="Rua Morais Navarro" />
+
+    <TextView
+        android:id="@+id/neighborhood_text"
+        style="@style/TitleSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/street_text"
+        android:layout_marginTop="8dp"
+        android:transitionName="neighborhood"
+        tools:text="Socorro" />
+
+    <TextView
+        android:id="@+id/complement_text"
+        style="@style/TitleSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/neighborhood_text"
+        android:layout_marginTop="8dp"
+        tools:text="Rio Pinheiros" />
+
+    <TextView
+        android:id="@+id/cep_text"
+        style="@style/TitleSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/complement_text"
+        android:layout_marginTop="8dp"
+        android:transitionName="cep"
+        tools:text="00000-050" />
+
+</RelativeLayout>
