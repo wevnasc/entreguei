@@ -1,7 +1,6 @@
 package br.com.wnascimento.entreguei.features.address.detail;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -19,12 +18,6 @@ public class AddressDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_ADDRESS = "EXTRA_ADDRESS";
 
-    @BindView(R.id.city_text)
-    TextView cityText;
-
-    @BindView(R.id.state_text)
-    TextView stateText;
-
     @BindView(R.id.street_text)
     TextView streetText;
 
@@ -36,6 +29,9 @@ public class AddressDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.cep_text)
     TextView cepText;
+
+    @BindView(R.id.city_and_state_text)
+    TextView cityAndStateText;
 
     public static void start(Activity context, Address address, Pair<View, String>... views) {
         Intent starter = new Intent(context, AddressDetailActivity.class);
@@ -54,12 +50,11 @@ public class AddressDetailActivity extends AppCompatActivity {
 
     private void showCollaboratorDetail() {
         Bundle data = getIntent().getExtras();
-        if(data != null) {
+        if (data != null) {
             Address address = (Address) data.getSerializable(EXTRA_ADDRESS);
 
-            if(address != null) {
-                cityText.setText(address.getCity());
-                stateText.setText(address.getState());
+            if (address != null) {
+                cityAndStateText.setText(address.getCityWithState());
                 streetText.setText(address.getStreet());
                 neighborhoodText.setText(address.getNeighborhood());
                 complementText.setText(address.getComplement());

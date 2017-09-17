@@ -4,19 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#EEE"
     tools:context="br.com.wnascimento.entreguei.features.address.search.SearchAddressActivity">
 
-    <include layout="@layout/partial_toolbar" />
-
-    <android.support.v7.widget.SearchView
-        android:id="@+id/address_search"
-        android:layout_margin="@dimen/activity_vertical_margin"
+    <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:inputType="number"
-        android:focusableInTouchMode="true"
-        style="@style/SearchViewAddress"/>
+        android:layout_height="100dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/address_search"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:focusableInTouchMode="true"
+                style="@style/SearchViewAddress"/>
+
+        </android.support.v7.widget.Toolbar>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
 
     <android.support.v7.widget.CardView
         android:elevation="6dp"
@@ -29,63 +44,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/city_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="São Paulo"/>
-
-            <TextView
-                android:id="@+id/separator_text"
-                android:layout_toEndOf="@id/city_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text=" - "/>
-
-            <TextView
-                android:layout_toEndOf="@id/separator_text"
-                android:id="@+id/state_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="SP"/>
-
-            <TextView
-                android:layout_below="@id/city_text"
-                android:id="@+id/street_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Rua Morais Navarro"/>
-
-            <TextView
-                android:layout_below="@+id/street_text"
-                android:id="@+id/neighborhood_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Socorro"/>
-
-            <TextView
-                android:layout_below="@+id/neighborhood_text"
-                android:id="@+id/complement_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Rio Pinheiros"/>
-
-            <TextView
-                android:layout_below="@id/complement_text"
-                android:id="@+id/cep_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="00000-050"/>
+            <include layout="@layout/partial_detail_address" />
 
             <Button
-                android:id="@+id/save_button"
-                android:layout_centerInParent="true"
+                style="@style/Button"
+                android:layout_margin="16dp"
                 android:layout_alignParentBottom="true"
-                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/action_save"/>
-
-
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

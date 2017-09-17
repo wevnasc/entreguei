@@ -22,14 +22,6 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
     @BindView(R.id.address_search)
     SearchView addressSearch;
 
-    @BindView(R.id.city_text)
-    TextView cityText;
-
-    @BindView(R.id.separator_text)
-    TextView separatorText;
-
-    @BindView(R.id.state_text)
-    TextView stateText;
 
     @BindView(R.id.street_text)
     TextView streetText;
@@ -42,6 +34,9 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
 
     @BindView(R.id.cep_text)
     TextView cepText;
+
+    @BindView(R.id.city_and_state_text)
+    TextView cityAndStateText;
 
     @Inject
     SearchAddressesContract.Presenter searchAddressPresenter;
@@ -93,8 +88,7 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
 
     @Override
     public void showAddressInformation(Address address) {
-        cityText.setText(address.getCity());
-        stateText.setText(address.getState());
+        cityAndStateText.setText(address.getCityWithState());
         streetText.setText(address.getStreet());
         neighborhoodText.setText(address.getNeighborhood());
         complementText.setText(address.getComplement());
@@ -118,12 +112,16 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
 
     @OnClick(R.id.save_button)
     public void saveAddress() {
+        String [] cityAndState = cityAndStateText.getText()
+                .toString()
+                .split("-");
+
         Address address = new Address(
                 cepText.getText().toString(),
                 streetText.getText().toString(),
                 neighborhoodText.getText().toString(),
-                cityText.getText().toString(),
-                stateText.getText().toString(),
+                cityAndState[0],
+                cityAndState[1],
                 complementText.getText().toString()
         );
 

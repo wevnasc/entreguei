@@ -40,6 +40,10 @@ public class Address implements Serializable{
         return cep.substring(0, 5) + "-" + cep.substring(5, 7);
     }
 
+    public String getCityWithState(){
+        return city + " - " +state;
+    }
+
     public int getCepToInt() {
         return Integer.parseInt(cep.replace("-", ""));
     }

@@ -8,10 +8,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textPrimary</item>
+        <item name="android:textColorSecondary">@color/textSecondary</item>
     </style>
 
     <style name="SearchViewAddress" parent="Widget.AppCompat.SearchView">
         <item name="queryBackground">@android:color/white</item>
+        <item name="android:background">@android:color/white</item>
         <item name="queryHint">@string/msg_search_cep</item>
         <item name="iconifiedByDefault">false</item>
         <item name="searchIcon">@drawable/ic_place</item>

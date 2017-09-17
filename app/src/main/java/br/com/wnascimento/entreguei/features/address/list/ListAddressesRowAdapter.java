@@ -23,7 +23,6 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
 
     private final List<Address> addressList;
     private final CallbackAddressList callbackAddressList;
-    private View fadeAnimation;
 
 
     public ListAddressesRowAdapter(List<Address> addressList, CallbackAddressList callbackAddressList) {
@@ -41,8 +40,7 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         Address address = addressList.get(position);
-        holder.cityText.setText(address.getCity());
-        holder.stateText.setText(address.getState());
+        holder.cityAnStateText.setText(address.getCityWithState());
         holder.neighborhoodText.setText(address.getNeighborhood());
         holder.cepText.setText(address.getCapFormatted());
 
@@ -63,14 +61,11 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
         Intent intent = new Intent(context, AddressDetailActivity.class);
         intent.putExtra(AddressDetailActivity.EXTRA_ADDRESS, address);
 
-        Pair<View, String> city = Pair.create(v.cityText, "city");
-        Pair<View, String> state = Pair.create(v.stateText, "state");
+        Pair<View, String> cityAnState = Pair.create(v.cityAnStateText, "city_and_state");
         Pair<View, String> neighborhood = Pair.create(v.neighborhoodText, "neighborhood");
         Pair<View, String> cep = Pair.create(v.cepText, "cep");
 
-        AddressDetailActivity.start(context, address, city , state, neighborhood, cep);
-
-
+        AddressDetailActivity.start(context, address, cityAnState , neighborhood, cep);
 
     }
 
@@ -81,11 +76,8 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.city_text)
-        TextView cityText;
-
-        @BindView(R.id.state_text)
-        TextView stateText;
+        @BindView(R.id.city_and_state_text)
+        TextView cityAnStateText;
 
         @BindView(R.id.neighborhood_text)
         TextView neighborhoodText;

@@ -5,43 +5,23 @@
     android:layout_marginTop="4dp"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:orientation="vertical">
 
         <TextView
-            style="@style/TitleSecondary"
-            android:id="@+id/city_text"
-            android:transitionName="city"
+            android:id="@+id/city_and_state_text"
+            style="@style/TitlePrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="São Paulo"/>
+            android:transitionName="city_and_state"
+            tools:text="São Paulo - SP" />
 
-        <TextView
-            style="@style/TitleSecondary"
-            android:transitionName="separator"
-            android:id="@+id/separator_text"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_toEndOf="@id/city_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/separator"/>
-
-        <TextView
-            style="@style/TitleSecondary"
-            android:layout_toEndOf="@id/separator_text"
-            android:id="@+id/state_text"
-            android:transitionName="state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="SP"/>
 
         <TextView
             style="@style/TextPrimary"
-            android:layout_below="@+id/city_text"
             android:id="@+id/neighborhood_text"
             android:transitionName="neighborhood"
             android:layout_width="wrap_content"
@@ -50,13 +30,12 @@
 
         <TextView
             style="@style/TextPrimary"
-            android:layout_below="@id/neighborhood_text"
             android:id="@+id/cep_text"
             android:transitionName="cep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="00000-050"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>
