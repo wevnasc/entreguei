@@ -30,4 +30,5 @@
     <string name="title_my_addresses">My Addresses</string>
     <string name="separator"> - </string>
     <string name="msg_no_address_found">no address found</string>
+    <string name="title_address_detal">Address Detail</string>
 </resources>

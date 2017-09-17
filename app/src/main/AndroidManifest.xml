@@ -22,8 +22,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".features.address.list.ListAddressesActivity" />
-        <activity android:name=".features.address.search.SearchAddressActivity" />
-        <activity android:name=".features.address.detail.AddressDetailActivity"></activity>
+        <activity android:name=".features.address.search.SearchAddressActivity" android:parentActivityName=".features.address.list.ListAddressesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".features.address.list.ListAddressesActivity" />
+        </activity>
+        <activity android:name=".features.address.detail.AddressDetailActivity"
+            android:parentActivityName=".features.address.list.ListAddressesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".features.address.list.ListAddressesActivity" />
+        </activity>
     </application>
 
 </manifest>
