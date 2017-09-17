@@ -43,7 +43,11 @@ public class ListAddressesPresenter implements ListAddressesContract.Presenter{
                 .subscribeWith(new DisposableSingleObserver<List<Address>>() {
                     @Override
                     public void onSuccess(List<Address> addresses) {
-                        listAddressesView.showAddresses(addresses);
+                        if(addresses.size() == 0) {
+                            listAddressesView.notifyEmptyList();
+                        } else {
+                            listAddressesView.showAddresses(addresses);
+                        }
                     }
 
                     @Override

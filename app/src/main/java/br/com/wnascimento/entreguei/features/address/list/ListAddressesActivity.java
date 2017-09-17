@@ -8,7 +8,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -33,6 +35,15 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.empty_list)
+    LinearLayout emptyList;
+
+    @BindView(R.id.progress)
+    ProgressBar progress;
+
+    ListAddressesRowAdapter listAddressesRowAdapter;
+
+
     public static void start(Context context) {
         Intent starter = new Intent(context, ListAddressesActivity.class);
         context.startActivity(starter);
@@ -49,7 +60,7 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     private void initToolbar() {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setTitle(R.string.title_my_addresses);
         }
     }
@@ -67,23 +78,29 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
 
     @Override
     public void showProgress() {
-
+        progress.setVisibility(View.VISIBLE);
+        listAddress.setVisibility(View.GONE);
     }
 
     @Override
     public void hideProgress() {
-
+        progress.setVisibility(View.GONE);
+        listAddress.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showAddresses(List<Address> addressList) {
+        listAddress.setVisibility(View.VISIBLE);
+        emptyList.setVisibility(View.GONE);
         listAddress.setLayoutManager(new LinearLayoutManager(this));
-        listAddress.setAdapter(new ListAddressesRowAdapter(addressList, this));
+        listAddressesRowAdapter = new ListAddressesRowAdapter(addressList, this);
+        listAddress.setAdapter(listAddressesRowAdapter);
     }
 
     @Override
     public void notifyEmptyList() {
-        Toast.makeText(this, "Erro", Toast.LENGTH_LONG).show();
+        listAddress.setVisibility(View.GONE);
+        emptyList.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -92,12 +109,16 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     }
 
     @Override
-    public void onLongClickItem(int cep) {
+    public void onLongClickItem(int cep, int position) {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_warning)
                 .setMessage(R.string.message_remove_address)
                 .setPositiveButton(R.string.action_yes, (dialogInterface, i) -> {
                     listAddressPresenter.removeAddress(cep);
+                    listAddressesRowAdapter.removeItem(position);
+                    if(listAddressesRowAdapter.getItemCount() == 0) {
+                        notifyEmptyList();
+                    }
                 })
                 .setNegativeButton(R.string.action_no, null)
                 .show();

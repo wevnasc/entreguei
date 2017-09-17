@@ -2,8 +2,6 @@ package br.com.wnascimento.entreguei.features.authentication;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,8 +27,8 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
 
     private static final int MIN_CHARACTER_PASSWORD = 6;
 
-    @BindView(R.id.register_progress)
-    ProgressBar registerProgress;
+    @BindView(R.id.progress)
+    ProgressBar progress;
 
     @BindView(R.id.email)
     AutoCompleteTextView email;
@@ -44,9 +42,6 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
     @BindView(R.id.email_login_form)
     LinearLayout emailLoginForm;
 
-    @Inject
-    AuthenticationPresenter authenticationPresenter;
-
     @BindView(R.id.authenticate_button)
     Button authenticateButton;
 
@@ -55,6 +50,9 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
 
     @BindView(R.id.register_form)
     ScrollView registerForm;
+
+    @Inject
+    AuthenticationPresenter authenticationPresenter;
 
 
     @Override
@@ -111,13 +109,13 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
     @Override
     public void showProgress() {
         emailLoginForm.setVisibility(View.GONE);
-        registerProgress.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
         emailLoginForm.setVisibility(View.VISIBLE);
-        registerProgress.setVisibility(View.GONE);
+        progress.setVisibility(View.GONE);
     }
 
     @Override

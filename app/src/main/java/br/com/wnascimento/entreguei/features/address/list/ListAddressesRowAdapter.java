@@ -46,12 +46,17 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
 
         holder.itemView.setOnClickListener(v -> showDetail(holder, address));
         holder.itemView.setOnLongClickListener(v -> {
-            callbackAddressList.onLongClickItem(address.getCepToInt());
+            callbackAddressList.onLongClickItem(address.getCepToInt(), position);
             return false;
         });
 
         AnimationUtil.fade(holder.itemView, 1000);
 
+    }
+
+    public void removeItem(int position){
+        addressList.remove(position);
+        notifyItemRemoved(position);
     }
 
     private void showDetail(ViewHolder v, Address address) {
@@ -93,7 +98,7 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
 
     public interface CallbackAddressList{
 
-        void onLongClickItem(int id);
+        void onLongClickItem(int id, int position);
     }
 
 }
