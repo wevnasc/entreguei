@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                style="@style/Title"
+                style="@style/TitlePrimary"
                 android:text="@string/title_welcome_to_entreguei" />
 
             <android.support.design.widget.TextInputLayout
