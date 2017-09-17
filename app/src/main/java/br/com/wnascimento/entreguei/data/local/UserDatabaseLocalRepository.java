@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import javax.inject.Inject;
 
-import br.com.wnascimento.entreguei.shared.exception.MotoboyNotFoundException;
+import br.com.wnascimento.entreguei.shared.exception.UserNotFoundException;
 import br.com.wnascimento.entreguei.data.local.PersistenceContract.UserEntry;
 import br.com.wnascimento.entreguei.features.authentication.User;
 import br.com.wnascimento.entreguei.features.authentication.UserLocalRepository;
@@ -75,7 +75,7 @@ public class UserDatabaseLocalRepository implements UserLocalRepository {
                 e.onSuccess(user);
                 e.onComplete();
             } else {
-                e.onError(new MotoboyNotFoundException("user not found in database!"));
+                e.onError(new UserNotFoundException("user not found in database!"));
             }
 
         });
