@@ -29,4 +29,5 @@
     <string name="title_welcome_to_entreguei">Welcome to Entreguei!</string>
     <string name="title_my_addresses">My Addresses</string>
     <string name="separator"> - </string>
+    <string name="msg_no_address_found">no address found</string>
 </resources>

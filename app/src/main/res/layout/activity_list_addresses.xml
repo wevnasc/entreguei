@@ -7,6 +7,7 @@
     tools:context="br.com.wnascimento.entreguei.features.address.list.ListAddressesActivity">
 
     <LinearLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -14,16 +15,45 @@
         <include
             layout="@layout/partial_toolbar" />
 
+        <include layout="@layout/partial_progress" />
+
+        <LinearLayout
+            android:id="@+id/empty_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_thumb_down"
+                android:contentDescription="@string/msg_no_address_found" />
+
+            <TextView
+                android:layout_margin="16dp"
+                style="@style/TextPrimary"
+                android:textSize="28sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/msg_no_address_found"/>
+
+        </LinearLayout>
+
+
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_address"
+            android:visibility="gone"
             android:layout_width="match_parent"
             tools:listitem="@layout/item_address"
             android:layout_height="match_parent" />
 
 
     </LinearLayout>
-
-
 
 
     <android.support.design.widget.FloatingActionButton
@@ -36,7 +66,7 @@
         android:elevation="6dp"
         app:borderWidth="0dp"
         android:src="@drawable/ic_search"
-        app:layout_anchor="@id/list_address"
+        app:layout_anchor="@id/content"
         app:layout_anchorGravity="bottom|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
