@@ -15,12 +15,14 @@
 
         <TextView
             android:id="@+id/city_text"
+            android:transitionName="city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="São Paulo"/>
 
         <TextView
             android:id="@+id/separator_text"
+            android:transitionName="separator"
             android:layout_toEndOf="@id/city_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,6 +31,7 @@
         <TextView
             android:layout_toEndOf="@id/separator_text"
             android:id="@+id/state_text"
+            android:transitionName="state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="SP"/>
@@ -43,6 +46,7 @@
         <TextView
             android:layout_below="@+id/street_text"
             android:id="@+id/neighborhood_text"
+            android:transitionName="neighborhood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Socorro"/>
@@ -57,6 +61,7 @@
         <TextView
             android:layout_below="@id/complement_text"
             android:id="@+id/cep_text"
+            android:transitionName="cep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="00000-050"/>

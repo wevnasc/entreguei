@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import java.util.List;
@@ -14,7 +16,6 @@ import javax.inject.Inject;
 
 import br.com.wnascimento.entreguei.R;
 import br.com.wnascimento.entreguei.features.address.Address;
-import br.com.wnascimento.entreguei.features.address.detail.AddressDetailActivity;
 import br.com.wnascimento.entreguei.features.address.search.SearchAddressActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +30,9 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     @BindView(R.id.list_address)
     RecyclerView listAddress;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     public static void start(Context context) {
         Intent starter = new Intent(context, ListAddressesActivity.class);
         context.startActivity(starter);
@@ -39,6 +43,15 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_addresses);
         ButterKnife.bind(this);
+        initToolbar();
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) {
+            actionBar.setTitle(R.string.title_my_addresses);
+        }
     }
 
     @Override
@@ -76,11 +89,6 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     @Override
     public void notifyAddressRemoved() {
 
-    }
-
-    @Override
-    public void onClickItem(Address address) {
-        AddressDetailActivity.start(this, address);
     }
 
     @Override

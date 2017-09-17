@@ -1,9 +1,13 @@
 package br.com.wnascimento.entreguei.features.address.detail;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import br.com.wnascimento.entreguei.R;
@@ -13,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class AddressDetailActivity extends AppCompatActivity {
 
-    private static final String EXTRA_ADDRESS = "EXTRA_ADDRESS";
+    public static final String EXTRA_ADDRESS = "EXTRA_ADDRESS";
 
     @BindView(R.id.city_text)
     TextView cityText;
@@ -33,10 +37,11 @@ public class AddressDetailActivity extends AppCompatActivity {
     @BindView(R.id.cep_text)
     TextView cepText;
 
-    public static void start(Context context, Address address) {
+    public static void start(Activity context, Address address, Pair<View, String>... views) {
         Intent starter = new Intent(context, AddressDetailActivity.class);
         starter.putExtra(EXTRA_ADDRESS, address);
-        context.startActivity(starter);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, views);
+        context.startActivity(starter, options.toBundle());
     }
 
     @Override

@@ -27,4 +27,6 @@
     <string name="action_yes">yes</string>
     <string name="action_no">No</string>
     <string name="title_welcome_to_entreguei">Welcome to Entreguei!</string>
+    <string name="title_my_addresses">My Addresses</string>
+    <string name="separator"> - </string>
 </resources>

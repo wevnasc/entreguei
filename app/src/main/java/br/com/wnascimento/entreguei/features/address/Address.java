@@ -36,6 +36,10 @@ public class Address implements Serializable{
         return cep;
     }
 
+    public String getCapFormatted() {
+        return cep.substring(0, 5) + "-" + cep.substring(5, 7);
+    }
+
     public int getCepToInt() {
         return Integer.parseInt(cep.replace("-", ""));
     }

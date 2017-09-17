@@ -3,6 +3,7 @@ package br.com.wnascimento.entreguei.features.address.search;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +49,9 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
 
     public static void start(Context context) {
         Intent starter = new Intent(context, SearchAddressActivity.class);
-        context.startActivity(starter);
+        Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(context,
+                android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
+        context.startActivity(starter, bundle);
     }
 
     @Override
