@@ -8,66 +8,6 @@
     tools:context="br.com.wnascimento.entreguei.features.address.detail.AddressDetailActivity">
 
     <include layout="@layout/partial_toolbar" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/city_text"
-            android:transitionName="city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="São Paulo"/>
-
-        <TextView
-            android:id="@+id/separator_text"
-            android:transitionName="separator"
-            android:layout_toEndOf="@id/city_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text=" - "/>
-
-        <TextView
-            android:layout_toEndOf="@id/separator_text"
-            android:id="@+id/state_text"
-            android:transitionName="state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="SP"/>
-
-        <TextView
-            android:layout_below="@id/city_text"
-            android:id="@+id/street_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Rua Morais Navarro"/>
-
-        <TextView
-            android:layout_below="@+id/street_text"
-            android:id="@+id/neighborhood_text"
-            android:transitionName="neighborhood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Socorro"/>
-
-        <TextView
-            android:layout_below="@+id/neighborhood_text"
-            android:id="@+id/complement_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Rio Pinheiros"/>
-
-        <TextView
-            android:layout_below="@id/complement_text"
-            android:id="@+id/cep_text"
-            android:transitionName="cep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="00000-050"/>
-
-
-
-    </RelativeLayout>
+    <include layout="@layout/partial_detail_address" />
 
 </LinearLayout>
