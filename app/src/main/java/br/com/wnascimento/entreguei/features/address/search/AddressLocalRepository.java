@@ -11,5 +11,5 @@ public interface AddressLocalRepository {
 
     Flowable<Address> getAddresses();
 
-    Completable removeAddress(int cep);
+    Completable removeAddress(String cep);
 }

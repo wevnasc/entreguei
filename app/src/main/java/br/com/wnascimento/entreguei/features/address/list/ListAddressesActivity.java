@@ -109,7 +109,7 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     }
 
     @Override
-    public void onLongClickItem(int cep, int position) {
+    public void onLongClickItem(String cep, int position) {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_warning)
                 .setMessage(R.string.message_remove_address)

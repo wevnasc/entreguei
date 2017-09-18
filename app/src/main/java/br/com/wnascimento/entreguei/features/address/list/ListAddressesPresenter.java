@@ -59,7 +59,7 @@ public class ListAddressesPresenter implements ListAddressesContract.Presenter{
     }
 
     @Override
-    public void removeAddress(int cep) {
+    public void removeAddress(String  cep) {
         listAddressesView.showProgress();
         Disposable disposable = removeAddressUseCase.execute(new RemoveAddressUseCase.Request(cep))
                 .doFinally(listAddressesView::hideProgress)
