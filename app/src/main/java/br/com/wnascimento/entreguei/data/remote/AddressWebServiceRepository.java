@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import br.com.wnascimento.entreguei.features.address.Address;
 import br.com.wnascimento.entreguei.features.address.search.AddressRemoteRepository;
+import br.com.wnascimento.entreguei.shared.exception.CepNotFoundException;
 import io.reactivex.Single;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -43,8 +44,12 @@ public class AddressWebServiceRepository implements AddressRemoteRepository{
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                Address address = gson.fromJson(response.body().charStream(), Address.class);
-                emitter.onSuccess(address);
+                if(response.isSuccessful()) {
+                    Address address = gson.fromJson(response.body().charStream(), Address.class);
+                    emitter.onSuccess(address);
+                } else {
+                    emitter.onError(new CepNotFoundException("cep not found"));
+                }
             }
         }));
     }
