@@ -2,6 +2,7 @@ package br.com.wnascimento.entreguei.features.authentication;
 
 import javax.inject.Inject;
 
+import br.com.wnascimento.entreguei.shared.preferences.ApplicationPreferencesInterface;
 import br.com.wnascimento.entreguei.shared.scheduler.IOScheduler;
 import br.com.wnascimento.entreguei.shared.scheduler.MainScheduler;
 import br.com.wnascimento.entreguei.shared.usecase.CompletableUseCase;
@@ -11,6 +12,7 @@ import io.reactivex.Scheduler;
 public class RegisterUseCase extends CompletableUseCase<RegisterUseCase.Request> {
 
     private final UserLocalRepository userLocalRepository;
+
 
     @Inject
     public RegisterUseCase(@IOScheduler Scheduler executor, @MainScheduler Scheduler main, UserLocalRepository userLocalRepository) {

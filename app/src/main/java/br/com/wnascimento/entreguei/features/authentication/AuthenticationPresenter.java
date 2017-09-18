@@ -36,6 +36,7 @@ public class AuthenticationPresenter implements AuthenticationContract.Presenter
     public void register(String email, String password) {
         authenticationView.showProgress();
         Disposable disposable = registerUseCase.execute(new RegisterUseCase.Request(email, password))
+                .andThen(loginUseCase.execute(new LoginUseCase.Request(email, password)))
                 .doFinally(authenticationView::hideProgress)
                 .subscribeWith(new DisposableCompletableObserver() {
                     @Override

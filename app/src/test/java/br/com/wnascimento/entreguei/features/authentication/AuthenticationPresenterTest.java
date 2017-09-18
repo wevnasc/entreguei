@@ -59,6 +59,9 @@ public class AuthenticationPresenterTest {
     }
 
     private void registerMotoboy(Completable complete) {
+        when(loginUseCase.execute(any(LoginUseCase.Request.class)))
+                .thenReturn(Completable.complete());
+
         when(registerUseCase.execute(any(RegisterUseCase.Request.class)))
                 .thenReturn(complete);
 
