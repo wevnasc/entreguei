@@ -72,6 +72,18 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
         initListener();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        searchAddressPresenter.restart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        searchAddressPresenter.stop();
+    }
+
     private void initListener() {
         addressSearch.setOnQueryTextListener(searchAddress);
     }

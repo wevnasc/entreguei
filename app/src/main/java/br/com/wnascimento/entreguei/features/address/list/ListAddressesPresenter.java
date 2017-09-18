@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.wnascimento.entreguei.features.address.Address;
+import br.com.wnascimento.entreguei.features.authentication.LogoutUseCase;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableCompletableObserver;
@@ -16,13 +17,15 @@ public class ListAddressesPresenter implements ListAddressesContract.Presenter{
     private final ListAddressesContract.View listAddressesView;
     private final ListAddressesUseCase listAddressesUseCase;
     private final RemoveAddressUseCase removeAddressUseCase;
+    private final LogoutUseCase logoutUseCase;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
-    public ListAddressesPresenter(ListAddressesContract.View listAddressesView, ListAddressesUseCase listAddressesUseCase, RemoveAddressUseCase removeAddressUseCase) {
+    public ListAddressesPresenter(ListAddressesContract.View listAddressesView, ListAddressesUseCase listAddressesUseCase, RemoveAddressUseCase removeAddressUseCase, LogoutUseCase logoutUseCase) {
         this.listAddressesView = listAddressesView;
         this.listAddressesUseCase = listAddressesUseCase;
         this.removeAddressUseCase = removeAddressUseCase;
+        this.logoutUseCase = logoutUseCase;
     }
 
     @Override
@@ -74,6 +77,24 @@ public class ListAddressesPresenter implements ListAddressesContract.Presenter{
 
                     }
                 });
+        compositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void logout() {
+        Disposable disposable = logoutUseCase.execute(new LogoutUseCase.Request())
+                .subscribeWith(new DisposableCompletableObserver() {
+                    @Override
+                    public void onComplete() {
+                        listAddressesView.toAuthentication();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
         compositeDisposable.add(disposable);
     }
 }

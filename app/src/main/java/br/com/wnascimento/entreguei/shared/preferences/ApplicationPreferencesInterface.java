@@ -9,4 +9,5 @@ public interface ApplicationPreferencesInterface {
 
     User getCurrentUser();
 
+    void clear();
 }

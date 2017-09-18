@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.wnascimento.entreguei.features.address.Address;
+import br.com.wnascimento.entreguei.features.authentication.LogoutUseCase;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
@@ -29,6 +30,9 @@ public class ListAddressPresenterTest {
     private RemoveAddressUseCase removeAddressUseCase;
 
     @Mock
+    private LogoutUseCase logoutUseCase;
+
+    @Mock
     private ListAddressesContract.View listAddressesView;
 
     @Mock
@@ -41,7 +45,7 @@ public class ListAddressPresenterTest {
     @Before
     public void setup() {
         initMocks(this);
-        listAddressesPresenter = new ListAddressesPresenter(listAddressesView, listAddressesUseCase, removeAddressUseCase);
+        listAddressesPresenter = new ListAddressesPresenter(listAddressesView, listAddressesUseCase, removeAddressUseCase, logoutUseCase);
     }
 
     @Test
@@ -98,6 +102,18 @@ public class ListAddressPresenterTest {
         verify(listAddressesView).hideProgress();
         verify(listAddressesView).notifyAddressRemoved();
 
+
+    }
+
+    @Test
+    public void onClickBack_clearSession() {
+
+        when(logoutUseCase.execute(any(LogoutUseCase.Request.class)))
+                .thenReturn(Completable.complete());
+
+        listAddressesPresenter.logout();
+
+        verify(listAddressesView).toAuthentication();
 
     }
 

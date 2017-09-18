@@ -20,6 +20,8 @@ public interface ListAddressesContract {
         void notifyEmptyList();
 
         void notifyAddressRemoved();
+
+        void toAuthentication();
     }
 
     interface Presenter extends BaseContract.Presenter {
@@ -27,6 +29,8 @@ public interface ListAddressesContract {
         void listAddresses();
 
         void removeAddress(String cep);
+
+        void logout();
     }
 
 }

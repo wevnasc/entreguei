@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import br.com.wnascimento.entreguei.R;
 import br.com.wnascimento.entreguei.features.address.Address;
 import br.com.wnascimento.entreguei.features.address.search.SearchAddressActivity;
+import br.com.wnascimento.entreguei.features.authentication.AuthenticationActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -57,6 +58,18 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
         initToolbar();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        listAddressPresenter.restart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        listAddressPresenter.stop();
+    }
+
     private void initToolbar() {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -65,11 +78,7 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        listAddressPresenter.restart();
-    }
+
 
     @OnClick(R.id.search_address_button)
     public void onClick() {
@@ -109,6 +118,11 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     }
 
     @Override
+    public void toAuthentication() {
+        AuthenticationActivity.start(this);
+    }
+
+    @Override
     public void onLongClickItem(String cep, int position) {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_warning)
@@ -124,4 +138,9 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
                 .show();
     }
 
+    @Override
+    public void onBackPressed() {
+        listAddressPresenter.logout();
+        super.onBackPressed();
+    }
 }
