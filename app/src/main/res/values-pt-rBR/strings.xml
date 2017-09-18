@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Entreguei</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_register">Registrar</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="error_invalid_email">O e-mail não é valido</string>
+    <string name="error_invalid_password">Senha muito curta</string>
+    <string name="error_incorrect_password">A senha está incorreta</string>
+    <string name="error_field_required">Este campo é obrigatório</string>
+    <string name="error_email_empty">Este campo é obrigatório</string>
+    <string name="error_password_empty">Este campo é obrigatório</string>
+    <string name="error_password_little">Senha muito curta</string>
+    <string name="error_email_invalid">O email não é valido</string>
+    <string name="error_register_new_user">Não foi possível registrar o usuário, este e-mail já esta em uso</string>
+    <string name="action_login">Login</string>
+    <string name="error_login">Ops! usuário não encontrado, verifique se o e-mail e a senha estão corretos</string>
+    <string name="msg_search_cep">Entre com seu cep</string>
+
+    <string name="action_save">Salvar</string>
+    <string name="title_warning">Atenção!</string>
+    <string name="message_remove_address">Você deseja remover este endereço?</string>
+    <string name="action_yes">Sim</string>
+    <string name="action_no">Não</string>
+    <string name="title_welcome_to_entreguei">Bem-vindo ao Entreguei!</string>
+    <string name="title_my_addresses">Meus endereços</string>
+    <string name="separator"> - </string>
+    <string name="msg_no_address_found">Lista de endereços vazia</string>
+    <string name="title_address_detal">Endereço</string>
+    <string name="msg_start_your_search">Comece sua busca</string>
+    <string name="error_address_not_found">Endereço não encontrado!</string>
+    <string name="error_registered_address">Endereço ja registrado!</string>
+    <string name="msg_address_saved_with_success">Endereço salvo com sucesso!</string>
+</resources>
