@@ -46,7 +46,7 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
 
         holder.itemView.setOnClickListener(v -> showDetail(holder, address));
         holder.itemView.setOnLongClickListener(v -> {
-            callbackAddressList.onLongClickItem(address.getCepToInt(), position);
+            callbackAddressList.onLongClickItem(address.getCep(), position);
             return false;
         });
 
@@ -98,7 +98,7 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
 
     public interface CallbackAddressList{
 
-        void onLongClickItem(int id, int position);
+        void onLongClickItem(String cep, int position);
     }
 
 }

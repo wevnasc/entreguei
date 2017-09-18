@@ -13,13 +13,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class RemoveAddressUseCaseTest {
 
-    private static final int CEP_TEST = 0;
+    private static final String CEP_TEST = "04944050";
 
     @ClassRule
     public static final ImmediateScheduler schedulers = new ImmediateScheduler();
@@ -38,13 +39,13 @@ public class RemoveAddressUseCaseTest {
     @Test
     public void shouldGetAllAddress() {
 
-        when(addressLocalRepository.removeAddress(anyInt()))
+        when(addressLocalRepository.removeAddress(anyString()))
                 .thenReturn(Completable.complete());
 
         removeAddressUseCase.execute(new RemoveAddressUseCase.Request(CEP_TEST))
                 .subscribe();
 
-        verify(addressLocalRepository).removeAddress(anyInt());
+        verify(addressLocalRepository).removeAddress(anyString());
 
     }
 

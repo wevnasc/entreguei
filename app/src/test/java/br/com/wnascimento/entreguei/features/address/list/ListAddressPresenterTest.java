@@ -20,7 +20,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ListAddressPresenterTest {
 
-    private static final int CEP_TEST = 0;
+    private static final String CEP_TEST = "04944050";
 
     @Mock
     private ListAddressesUseCase listAddressesUseCase;

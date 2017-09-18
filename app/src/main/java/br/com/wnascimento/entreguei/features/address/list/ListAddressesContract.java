@@ -26,7 +26,7 @@ public interface ListAddressesContract {
 
         void listAddresses();
 
-        void removeAddress(int cep);
+        void removeAddress(String cep);
     }
 
 }

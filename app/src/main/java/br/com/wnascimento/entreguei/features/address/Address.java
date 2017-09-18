@@ -33,19 +33,15 @@ public class Address implements Serializable{
     }
 
     public String getCep() {
-        return cep;
+        return cep.replace("-", "");
     }
 
     public String getCapFormatted() {
-        return cep.substring(0, 5) + "-" + cep.substring(5, 7);
+        return cep.substring(0, 5) + "-" + cep.substring(5, 8);
     }
 
     public String getCityWithState(){
         return city + " - " +state;
-    }
-
-    public int getCepToInt() {
-        return Integer.parseInt(cep.replace("-", ""));
     }
 
     public String getStreet() {

@@ -14,7 +14,6 @@ import br.com.wnascimento.entreguei.shared.preferences.ApplicationPreferencesInt
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.functions.Action;
 
 
 public class AddressDatabaseRepository implements AddressLocalRepository {
@@ -36,7 +35,7 @@ public class AddressDatabaseRepository implements AddressLocalRepository {
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            values.put(AddressEntry.COLUMN_NAME_CEP, address.getCepToInt());
+            values.put(AddressEntry.COLUMN_NAME_CEP, address.getCep());
             values.put(AddressEntry.COLUMN_NAME_CITY, address.getCity());
             values.put(AddressEntry.COLUMN_NAME_COMPLEMENT, address.getComplement());
             values.put(AddressEntry.COLUMN_NAME_NEIGHBORHOOD, address.getNeighborhood());
@@ -46,7 +45,7 @@ public class AddressDatabaseRepository implements AddressLocalRepository {
             db.insert(AddressEntry.TABLE_NAME, null, values);
 
             values = new ContentValues();
-            values.put(UserAddressEntry.COLUMN_NAME_ADDRESS_CEP, address.getCepToInt());
+            values.put(UserAddressEntry.COLUMN_NAME_ADDRESS_CEP, address.getCep());
             values.put(UserAddressEntry.COLUMN_NAME_USER_ID, applicationPreferences.getCurrentUser().getId());
 
             db.insertOrThrow(UserAddressEntry.TABLE_NAME, null, values);
@@ -73,7 +72,7 @@ public class AddressDatabaseRepository implements AddressLocalRepository {
             if (cursor != null && cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
                     Address address = new Address(
-                            String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_CEP))),
+                            cursor.getString((cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_CEP))),
                             cursor.getString(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_STREET)),
                             cursor.getString(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_NEIGHBORHOOD)),
                             cursor.getString(cursor.getColumnIndexOrThrow(AddressEntry.COLUMN_NAME_CITY)),
@@ -94,12 +93,12 @@ public class AddressDatabaseRepository implements AddressLocalRepository {
     }
 
     @Override
-    public Completable removeAddress(int cep) {
+    public Completable removeAddress(String cep) {
 
         return Completable.fromAction(() -> {
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
-            String [] args = {String.valueOf(cep), String.valueOf(applicationPreferences.getCurrentUser().getId())};
+            String [] args = {cep, String.valueOf(applicationPreferences.getCurrentUser().getId())};
 
             db.delete(UserAddressEntry.TABLE_NAME, UserAddressEntry.COLUMN_NAME_ADDRESS_CEP + " = ?" +
                     " AND " + UserAddressEntry.COLUMN_NAME_USER_ID + " = ?", args);

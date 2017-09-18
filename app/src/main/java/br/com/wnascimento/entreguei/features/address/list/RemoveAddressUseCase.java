@@ -27,13 +27,13 @@ class RemoveAddressUseCase extends CompletableUseCase<RemoveAddressUseCase.Reque
 
     public static final class Request extends CompletableUseCase.Request {
 
-        private final int cep;
+        private final String cep;
 
-        public Request(int cep) {
+        public Request(String cep) {
             this.cep = cep;
         }
 
-        public int getCep() {
+        public String getCep() {
             return cep;
         }
     }
