@@ -73,25 +73,31 @@
             android:layout_height="match_parent"
             android:text="@string/msg_start_your_search"/>
 
-        <RelativeLayout
-            android:visibility="gone"
-            android:id="@+id/address_information"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <include layout="@layout/partial_detail_address" />
-
-            <Button
-                style="@style/Button"
-                android:layout_margin="16dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/save_button"
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/address_information"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/action_save"/>
-        </RelativeLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/partial_detail_address" />
+
+                <Button
+                    style="@style/Button"
+                    android:layout_margin="16dp"
+                    android:id="@+id/save_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_save"/>
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
 
     </android.support.v7.widget.CardView>
 

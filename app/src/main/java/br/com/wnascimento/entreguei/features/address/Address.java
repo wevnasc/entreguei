@@ -33,11 +33,12 @@ public class Address implements Serializable{
     }
 
     public String getCep() {
-        return cep.replace("-", "");
+        return getCepWithoutTrace();
     }
 
-    public String getCapFormatted() {
-        return cep.substring(0, 5) + "-" + cep.substring(5, 8);
+
+    public String getCepFormatted() {
+        return getCep().substring(0, 5) + "-" + getCep().substring(5, 8);
     }
 
     public String getCityWithState(){
@@ -75,4 +76,9 @@ public class Address implements Serializable{
                 ", complement='" + complement + '\'' +
                 '}';
     }
+
+    private String getCepWithoutTrace() {
+        return cep.replace("-", "").trim();
+    }
+
 }
