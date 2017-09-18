@@ -78,7 +78,10 @@ public class Address implements Serializable{
     }
 
     private String getCepWithoutTrace() {
-        return cep.replace("-", "").trim();
+        if(cep != null) {
+            return cep.replace("-", "").trim();
+        }
+        return null;
     }
 
 }
