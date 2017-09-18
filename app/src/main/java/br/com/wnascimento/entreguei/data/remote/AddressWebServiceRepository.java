@@ -44,10 +44,14 @@ public class AddressWebServiceRepository implements AddressRemoteRepository{
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if(response.isSuccessful()) {
-                    Address address = gson.fromJson(response.body().charStream(), Address.class);
-                    emitter.onSuccess(address);
-                } else {
+                try {
+                    if(response.isSuccessful()) {
+                        Address address = gson.fromJson(response.body().charStream(), Address.class);
+                        emitter.onSuccess(address);
+                    } else {
+                        emitter.onError(new CepNotFoundException("cep not found"));
+                    }
+                } catch (Exception e) {
                     emitter.onError(new CepNotFoundException("cep not found"));
                 }
             }
