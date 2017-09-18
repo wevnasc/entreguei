@@ -31,4 +31,8 @@
     <string name="separator"> - </string>
     <string name="msg_no_address_found">no address found</string>
     <string name="title_address_detal">Address Detail</string>
+    <string name="msg_start_your_search">Start your search</string>
+    <string name="error_address_not_found">Address not found!</string>
+    <string name="error_registered_address">Registered Address!</string>
+    <string name="msg_address_saved_with_success">Address saved with success!</string>
 </resources>

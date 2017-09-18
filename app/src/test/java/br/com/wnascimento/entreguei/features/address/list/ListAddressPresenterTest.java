@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.wnascimento.entreguei.features.address.Address;
@@ -45,19 +46,32 @@ public class ListAddressPresenterTest {
 
     @Test
     public void listAllAddress_showListAddresses() {
+        List<Address> addresses = new ArrayList<>();
+        addresses.add(mock(Address.class));
 
-        listAddresses(Single.just(addressList));
+        listAddresses(Single.just(addresses));
 
         verify(listAddressesView).showProgress();
         verify(listAddressesView).hideProgress();
-        verify(listAddressesView).showAddresses(addressList);
+        verify(listAddressesView).showAddresses(addresses);
 
     }
 
     @Test
-    public void listAllAddress_notifyListEmpty() {
+    public void listAllAddress_withErrorNotifyListEmpty() {
 
         listAddresses(Single.error(mock(Exception.class)));
+
+        verify(listAddressesView).showProgress();
+        verify(listAddressesView).hideProgress();
+        verify(listAddressesView).notifyEmptyList();
+
+    }
+
+    @Test
+    public void listAllAddress_listEmptyNotifyListEmpty() {
+
+        listAddresses(Single.just(addressList));
 
         verify(listAddressesView).showProgress();
         verify(listAddressesView).hideProgress();

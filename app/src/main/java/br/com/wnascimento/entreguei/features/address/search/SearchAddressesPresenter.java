@@ -36,16 +36,21 @@ public class SearchAddressesPresenter implements SearchAddressesContract.Present
     public void searchAddress(String cep) {
         searchAddressView.showProgress();
         Disposable disposable = searchAddressUseCase.execute(new SearchAddressUseCase.Request(cep))
-                .doFinally(searchAddressView::hideProgress)
                 .subscribeWith(new DisposableSingleObserver<Address>() {
 
                     @Override
                     public void onSuccess(Address address) {
-                        searchAddressView.showAddressInformation(address);
+                        searchAddressView.hideProgress();
+                        if(address.getCep() == null) {
+                            searchAddressView.showErrorAddressNotFound();
+                        } else {
+                            searchAddressView.showAddressInformation(address);
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        searchAddressView.hideProgress();
                         searchAddressView.showErrorAddressNotFound();
                     }
                 });
