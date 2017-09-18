@@ -42,7 +42,7 @@ public class ListAddressesRowAdapter extends RecyclerView.Adapter<ListAddressesR
         Address address = addressList.get(position);
         holder.cityAnStateText.setText(address.getCityWithState());
         holder.neighborhoodText.setText(address.getNeighborhood());
-        holder.cepText.setText(address.getCapFormatted());
+        holder.cepText.setText(address.getCepFormatted());
 
         holder.itemView.setOnClickListener(v -> showDetail(holder, address));
         holder.itemView.setOnLongClickListener(v -> {

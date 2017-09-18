@@ -120,6 +120,7 @@ public class ListAddressesActivity extends DaggerAppCompatActivity implements Li
     @Override
     public void toAuthentication() {
         AuthenticationActivity.start(this);
+        finishAffinity();
     }
 
     @Override

@@ -2,11 +2,12 @@ package br.com.wnascimento.entreguei.features.address.search;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.SearchView;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -48,7 +49,7 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
     RelativeLayout errorInformation;
 
     @BindView(R.id.address_information)
-    RelativeLayout addressInformation;
+    LinearLayout addressInformation;
 
     @Inject
     SearchAddressesContract.Presenter searchAddressPresenter;
@@ -82,6 +83,15 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
     protected void onDestroy() {
         super.onDestroy();
         searchAddressPresenter.stop();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        String cep = addressSearch.getQuery().toString();
+        if(cep.length() > 0) {
+            searchAddressPresenter.searchAddress(cep);
+        }
     }
 
     private void initListener() {
@@ -123,7 +133,7 @@ public class SearchAddressActivity extends DaggerAppCompatActivity implements Se
         streetText.setText(address.getStreet());
         neighborhoodText.setText(address.getNeighborhood());
         complementText.setText(address.getComplement());
-        cepText.setText(address.getCep());
+        cepText.setText(address.getCepFormatted());
     }
 
     @Override
