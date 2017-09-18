@@ -109,7 +109,7 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
             email.setError(getString(R.string.error_email_empty));
         }
 
-        if (ValidateUtil.validateEmail(getEmail())) {
+        if (!ValidateUtil.isValidateEmail(getEmail())) {
             formValid = false;
             email.setError(getString(R.string.error_email_invalid));
         }
