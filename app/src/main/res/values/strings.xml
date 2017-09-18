@@ -14,7 +14,7 @@
     <string name="error_password_empty">Password cannot be empty</string>
     <string name="error_password_little">password must be at least 6 characters long</string>
     <string name="error_email_invalid">The e-mail is not valid</string>
-    <string name="error_register_new_motoboy">Unable to register new user, email may be in use</string>
+    <string name="error_register_new_user">Unable to register new user, email may be in use</string>
     <string name="action_login">Login</string>
     <string name="error_login">Ops! user not found, check your email and password</string>
     <string name="msg_search_cep">Enter with your Cep</string>

@@ -141,7 +141,7 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
 
     @Override
     public void showErrorRegister() {
-        Toast.makeText(this, R.string.error_register_new_motoboy, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.error_register_new_user, Toast.LENGTH_SHORT).show();
     }
 
     @Override
