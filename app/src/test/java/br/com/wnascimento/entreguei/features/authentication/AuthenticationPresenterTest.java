@@ -24,6 +24,7 @@ public class AuthenticationPresenterTest {
     @Mock
     private LoginUseCase loginUseCase;
 
+
     @Mock
     private AuthenticationContract.View authenticationView;
 
@@ -63,6 +64,8 @@ public class AuthenticationPresenterTest {
 
         authenticationPresenter.register(EMAIL_TEST, PASSWORD_TEST);
     }
+
+
 
     @Test
     public void onClickLogin_showAddresses() {

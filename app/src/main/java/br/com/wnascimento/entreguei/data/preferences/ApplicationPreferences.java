@@ -36,4 +36,11 @@ public class ApplicationPreferences implements ApplicationPreferencesInterface {
                 sharedPreferences.getString(PersistenceContract.UserEntry.COLUMN_NAME_PASSWORD, "")
         );
     }
+
+    @Override
+    public void clear() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 }

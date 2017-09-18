@@ -1,5 +1,7 @@
 package br.com.wnascimento.entreguei.features.authentication;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -55,6 +57,11 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
     AuthenticationPresenter authenticationPresenter;
 
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, AuthenticationActivity.class);
+        context.startActivity(starter);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +70,27 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
         animateMotoboy();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        authenticationPresenter.restart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        authenticationPresenter.stop();
+    }
+
     private void animateMotoboy() {
         AnimationUtil.leftToRigth(motoboyImage, 2000);
     }
 
     @OnClick(R.id.authenticate_button)
     public void onClick() {
-        authenticationPresenter.login(getEmail(), getPassword());
+        if (isFormValid()) {
+            authenticationPresenter.login(getEmail(), getPassword());
+        }
     }
 
     @OnClick(R.id.register_button)
@@ -127,7 +148,6 @@ public class AuthenticationActivity extends DaggerAppCompatActivity implements A
     public void showErrorLogin() {
         Toast.makeText(this, R.string.error_login, Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     public void toMain() {
