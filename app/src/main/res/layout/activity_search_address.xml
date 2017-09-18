@@ -4,12 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#EEE"
     tools:context="br.com.wnascimento.entreguei.features.address.search.SearchAddressActivity">
 
     <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
@@ -41,7 +39,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include layout="@layout/partial_progress" />
+
         <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/error_information"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/search_error_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_error"
+                android:contentDescription="@string/error_address_not_found" />
+
+            <TextView
+                style="@style/TitleSecondary"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/search_error_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/error_address_not_found"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/start_search_text"
+            style="@style/TitleSecondary"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/msg_start_your_search"/>
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/address_information"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

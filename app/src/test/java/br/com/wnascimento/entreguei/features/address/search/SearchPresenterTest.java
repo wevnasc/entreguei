@@ -1,5 +1,7 @@
 package br.com.wnascimento.entreguei.features.address.search;
 
+import android.support.annotation.NonNull;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -39,13 +41,26 @@ public class SearchPresenterTest {
 
 
     @Test
-    public void onClickSearch_showAddress() {
+    public void onClickSearch_nullAddressShowAddressNotFound() {
         searchAddress(Single.just(mock(Address.class)));
 
         verify(searchAddressView).showProgress();
         verify(searchAddressView).hideProgress();
-        verify(searchAddressView).showAddressInformation(any(Address.class));
+        verify(searchAddressView).showErrorAddressNotFound();
     }
+
+    @Test
+    public void onClickSearch_ShowAddress() {
+        Address address = getAddress();
+
+        searchAddress(Single.just(address));
+
+        verify(searchAddressView).showProgress();
+        verify(searchAddressView).hideProgress();
+        verify(searchAddressView).showAddressInformation(address);
+    }
+
+
 
     @Test
     public void onClickSearch_showErrorAddressNotFound() {
@@ -89,6 +104,12 @@ public class SearchPresenterTest {
         verify(searchAddressView).hideProgress();
         verify(searchAddressView).notifySaveError();
 
+    }
+
+    @NonNull
+    private Address getAddress() {
+        return new Address(CEP_TEST, "STREET",
+                "NEIGHBORHOOD", "CITY", "STATE", "COMPLEMENT");
     }
 
 }
