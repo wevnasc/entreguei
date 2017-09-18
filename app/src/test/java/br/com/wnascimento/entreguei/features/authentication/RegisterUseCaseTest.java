@@ -6,6 +6,8 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import br.com.wnascimento.entreguei.data.preferences.ApplicationPreferences;
+import br.com.wnascimento.entreguei.shared.preferences.ApplicationPreferencesInterface;
 import br.com.wnascimento.entreguei.util.ImmediateScheduler;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -47,6 +49,7 @@ public class RegisterUseCaseTest {
                 .create(new RegisterUseCase.Request(EMAIL_TEST, PASSWORD_TEST));
 
         verify(userLocalRepository).registerNew(any(User.class));
+
     }
 
 }
